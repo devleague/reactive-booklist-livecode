@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BookList from '../../components/BookList';
 import BookListTitle from '../../components/BookListTitle';
-import AddBook from '../AddBook';
+import AddBookHooked from '../../components/AddBookHooked';
 import { connect } from 'react-redux';
 import './App.css';
 import { loadBooks } from '../../actions';
@@ -11,7 +11,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      pageTitle: `This is Ed's Books:`
+      pageTitle: `This is Ed's Books:`,
     };
   }
 
@@ -23,10 +23,8 @@ class App extends Component {
     return (
       <div className="App">
         <BookListTitle title={this.state.pageTitle} />
-
         <BookList books={this.props.books} />
-
-        <AddBook />
+        <AddBookHooked />
       </div>
     );
   }
@@ -34,21 +32,21 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    books: state
+    books: state,
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     loadBooks: () => {
       return dispatch(loadBooks());
-    }
+    },
   };
-}
+};
 
 App = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(App);
 
 export default App;
